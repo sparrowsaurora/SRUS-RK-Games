@@ -5,20 +5,36 @@ class PlayerList:
         self.__head = None
         self.__tail = None
 
-    def insert_player(self, player):
+    def insert_player_head(self, player):
         new_node = PlayerNode(player)
         if self.__head is None:
-            # If the list is empty, both head and tail should point to new_node
+            # If the list is empty: head + tail point to new_node
             self.__head = new_node
             self.__tail = new_node
         else:
-            # Insert at the head, update pointers
+            # Insert head, update pointers
             new_node.set_next(self.__head)
             self.__head.set_prev(new_node)
             self.__head = new_node
 
         if self.__head.get_next() is None:
             self.__tail = self.__head
+
+    def insert_player_tail(self, player):
+        # insert player at tail
+        new_node = PlayerNode(player)
+        # again, if the list is empty:
+        if self.__tail is None:
+            self.__tail = new_node
+            self.__head = new_node
+        else:
+            new_node.set_prev(self.__tail)
+            self.__tail.set_next(new_node)
+            self.__tail = new_node
+
+        # if one item in list:
+        if self.__tail.get_prev() is None:
+            self.__head = self.__tail
 
     @property
     def get_head(self):

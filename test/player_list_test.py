@@ -8,10 +8,10 @@ class TestPlayerList(unittest.TestCase):
         """Set up a fresh PlayerList before each test"""
         self.player_list = PlayerList()
 
-    def test_insert_first_player(self):
+    def test_insert_first_player_at_head(self):
         # Test inserting the first player into an empty list
         player1 = Player("1", "John Doe")
-        self.player_list.insert_player(player1)
+        self.player_list.insert_player_head(player1)
 
         head_node = self.player_list.get_head
         tail_node = self.player_list.get_tail
@@ -22,23 +22,35 @@ class TestPlayerList(unittest.TestCase):
         self.assertIsNone(head_node.get_next())
         self.assertIsNone(head_node.get_prev())
 
-    def test_insert_multiple_players(self):
+    def test_insert_multiple_players_at_head(self):
         # Test inserting multiple players and list ordering
         player1 = Player("1", "John Doe")
         player2 = Player("2", "Jane Doe")
 
-        self.player_list.insert_player(player1)  # John
-        self.player_list.insert_player(player2)  # Jane inserted at head
+        self.player_list.insert_player_head(player1)  # John
+        self.player_list.insert_player_head(player2)  # Jane inserted at head
 
         head_node = self.player_list.get_head
         tail_node = self.player_list.get_tail
 
-        self.assertIsInstance(head_node, PlayerNode)
+        self.assertIsInstance(head_node, PlayerNode) # tests if head_node is a playerNode instance
         self.assertEqual(head_node.get_player(), player2)  # Jane should be at head
         self.assertEqual(head_node.get_next().get_player(), player1)  # John next
         self.assertEqual(tail_node.get_player(), player1)  # John should be the tail
         self.assertIsNone(tail_node.get_next())  # Tail should have no next
         self.assertEqual(tail_node.get_prev(), head_node)  # John's prev is Jane
+
+    def test_insert_multiple_players_at_tail(self):
+        # test inserting multiple players at tail
+        player1 = Player("1", "John Doe")
+        self.player_list.insert_player_tail(player1) #insert john at tail
+        player2 = Player("2", "Jane Doe")
+        self.player_list.insert_player_tail(player2) # insert jane at tail
+
+        head_node = self.player_list.get_head
+        tail_node = self.player_list.get_tail
+
+        self.assertIsInstance(tail_node, PlayerNode) # tests if head_node is a playerNode instance
 
 if __name__ == "__main__":
     unittest.main()
