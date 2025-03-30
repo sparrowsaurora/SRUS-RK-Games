@@ -85,3 +85,23 @@ class PlayerList:
     @property
     def get_tail(self):
         return self.__tail
+
+    def display(self, forward=True):
+        if forward:
+            # head to tail
+            current = self.__head
+            print("Format: Head -> Tail")
+            print("None", end=" -> ")
+            while current:
+                print(f"({current.get_player().uid()} | {current.get_player().name()})", end=" -> ")
+                current = current.get_next()
+            print("None")
+        else:
+            # tail to head
+            current = self.__tail
+            print("Format: Tail -> Head")
+            print("None", end=" -> ")
+            while current:
+                print(f"({current.get_player().uid()} | {current.get_player().name()})", end=" -> ")
+                current = current.get_prev()
+            print("None")

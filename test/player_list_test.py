@@ -126,5 +126,16 @@ class TestPlayerList(unittest.TestCase):
         with self.assertRaises(IndexError):
             self.player_list.del_item("99")
 
+    def test_display(self):
+        player1 = Player("1", "John Doe")
+        self.player_list.insert_player_head(player1)  # insert john at head
+        player2 = Player("2", "Jane Doe")
+        self.player_list.insert_player_head(player2)  # insert jane at head
+        player3 = Player("3", "unknown")
+        self.player_list.insert_player_head(player3)  # insert unknown at head
+
+        self.player_list.display()
+        self.player_list.display(False)
+
 if __name__ == "__main__":
     unittest.main()
