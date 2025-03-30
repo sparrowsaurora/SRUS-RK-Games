@@ -47,10 +47,43 @@ class TestPlayerList(unittest.TestCase):
         player2 = Player("2", "Jane Doe")
         self.player_list.insert_player_tail(player2) # insert jane at tail
 
-        head_node = self.player_list.get_head
         tail_node = self.player_list.get_tail
+        head_node = self.player_list.get_head
 
-        self.assertIsInstance(tail_node, PlayerNode) # tests if head_node is a playerNode instance
+        self.assertIsInstance(tail_node, PlayerNode) # tests if tail_node is a playerNode instance
+        self.assertEqual(tail_node.get_player(), player2)  # Jane should be at tail
+        self.assertEqual(tail_node.get_prev().get_player(), player1)  # John next
+        self.assertEqual(head_node.get_player(), player1)  # John should be the head
+        self.assertIsNone(head_node.get_prev())  # Head should have no next
+        self.assertEqual(head_node.get_next(), tail_node)  # John's prev is Jane
+
+    def test_delete_tail(self):
+        player1 = Player("1", "John Doe")
+        self.player_list.insert_player_tail(player1)  # insert john at tail
+        player2 = Player("2", "Jane Doe")
+        self.player_list.insert_player_tail(player2)  # insert jane at tail
+        player3 = Player("3", "unknown")
+        self.player_list.insert_player_tail(player3)  # insert unknown at tail
+
+        tail_node = self.player_list.get_tail #gets tail value
+        self.assertEqual(tail_node.get_player(), player3)
+        self.player_list.del_tail()
+        tail_node = self.player_list.get_tail  # gets tail value
+        self.assertEqual(tail_node.get_player(), player2)
+
+    def test_delete_head(self):
+        player1 = Player("1", "John Doe")
+        self.player_list.insert_player_head(player1)  # insert john at head
+        player2 = Player("2", "Jane Doe")
+        self.player_list.insert_player_head(player2)  # insert jane at head
+        player3 = Player("3", "unknown")
+        self.player_list.insert_player_head(player3)  # insert unknown at head
+
+        head_node = self.player_list.get_head  # gets head value
+        self.assertEqual(head_node.get_player(), player3)
+        self.player_list.del_head()
+        head_node = self.player_list.get_head  # gets head value
+        self.assertEqual(head_node.get_player(), player2)
 
 if __name__ == "__main__":
     unittest.main()

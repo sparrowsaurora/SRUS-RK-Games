@@ -36,6 +36,18 @@ class PlayerList:
         if self.__tail.get_prev() is None:
             self.__head = self.__tail
 
+    def del_tail(self):
+        if self.__tail is None:
+            raise IndexError("Cannot delete empty tail")
+        self.__tail = self.__tail.get_prev()
+        self.__tail.set_next(None)
+
+    def del_head(self):
+        if self.__head is None:
+            raise IndexError("Cannot delete empty head")
+        self.__head = self.__head.get_next()
+        self.__head.set_prev(None)
+
     @property
     def get_head(self):
         return self.__head
