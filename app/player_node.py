@@ -13,6 +13,9 @@ class PlayerNode:
     def get_prev(self):
         return self.__prev
 
+    def set_player(self, player):
+        self.__player = player
+
     def set_next(self, next_node):
         self.__next = next_node
 

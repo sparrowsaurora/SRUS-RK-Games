@@ -85,5 +85,46 @@ class TestPlayerList(unittest.TestCase):
         head_node = self.player_list.get_head  # gets head value
         self.assertEqual(head_node.get_player(), player2)
 
+    def test_delete_middle_node(self):
+        player1 = Player("1", "John Doe")
+        self.player_list.insert_player_head(player1)  # insert john at head
+        player2 = Player("2", "Jane Doe")
+        self.player_list.insert_player_head(player2)  # insert jane at head
+        player3 = Player("3", "unknown")
+        self.player_list.insert_player_head(player3)  # insert unknown at head
+
+        self.player_list.del_item("2")
+        self.assertEqual(self.player_list.get_head.key, "3")
+        self.assertEqual(self.player_list.get_tail.key, "1")
+        self.assertEqual(self.player_list.get_head.get_next().key, "1")
+        self.assertEqual(self.player_list.get_tail.get_prev().key, "3")
+
+    def test_delete_head_node(self):
+        player1 = Player("1", "John Doe")
+        self.player_list.insert_player_head(player1)  # insert john at head
+        player2 = Player("2", "Jane Doe")
+        self.player_list.insert_player_head(player2)  # insert jane at head
+
+        self.player_list.insert_player_tail(player1)
+        self.player_list.insert_player_tail(player2)
+
+        self.player_list.del_item("1")
+        self.assertEqual(self.player_list.get_head.key, "2")
+        self.assertIsNone(self.player_list.get_head.get_prev())
+
+    def test_delete_tail_node(self):
+        player1 = Player("1", "John Doe")
+        self.player_list.insert_player_head(player1)  # insert john at head
+        player2 = Player("2", "Jane Doe")
+        self.player_list.insert_player_head(player2)  # insert jane at head
+
+        self.player_list.del_item("2")
+        self.assertEqual(self.player_list.get_tail.key, "1")
+        self.assertIsNone(self.player_list.get_tail.get_next())
+
+    def test_delete_nonexistent_node(self):
+        with self.assertRaises(IndexError):
+            self.player_list.del_item("99")
+
 if __name__ == "__main__":
     unittest.main()

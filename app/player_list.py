@@ -48,6 +48,36 @@ class PlayerList:
         self.__head = self.__head.get_next()
         self.__head.set_prev(None)
 
+    def del_item(self, key):
+        if self.__head is None:
+            raise IndexError("Cannot delete item from empty list")
+
+        current = self.__head
+        while current is not None and current.key != key:
+            current = current.get_next()
+
+        # if key was not found
+        if current is None:
+            raise IndexError("Item not in list")
+
+        #if node to be deleted == head
+        if current == self.__head:
+            self.__head = current.get_next()
+            if self.__head:
+                self.__head.set_prev(None)
+
+        # if node in middle
+        if current.get_next() is not None:
+            current.get_next().set_prev(current.get_prev())
+        if current.get_prev() is not None:
+            current.get_prev().set_next(current.get_next())
+
+        #if node == tail
+        if current == self.__tail:
+            self.__tail = current.get_prev()
+            if self.__tail:
+                self.__tail.set_next(None)
+
     @property
     def get_head(self):
         return self.__head
