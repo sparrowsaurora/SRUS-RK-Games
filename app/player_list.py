@@ -1,9 +1,21 @@
 from app.player_node import PlayerNode
+import math
 
 class PlayerList:
-    def __init__(self):
+    def __init__(self, name: int):
         self.__head = None
         self.__tail = None
+        self.name = PlayerList.find_player_list_name(name)
+
+    @staticmethod
+    def find_player_list_name(number):
+        list_id = ''
+        while number > 0:
+            number -= 1  # Shift by 1 because A is 1 not 0
+            list_id = chr(ord('A') + (number % 26)) + list_id
+            number //= 26
+        return list_id
+
 
     def insert_player_head(self, player):
         new_node = PlayerNode(player)
@@ -90,7 +102,7 @@ class PlayerList:
         if forward:
             # head to tail
             current = self.__head
-            print("Format: Head -> Tail")
+            print(f"{self.name} -> Format: Head -> Tail")
             print("None", end=" -> ")
             while current:
                 print(f"({current.get_player().uid()} | {current.get_player().name()})", end=" -> ")
@@ -99,9 +111,15 @@ class PlayerList:
         else:
             # tail to head
             current = self.__tail
-            print("Format: Tail -> Head")
+            print(f"{self.name} -> Format: Tail -> Head")
             print("None", end=" -> ")
             while current:
                 print(f"({current.get_player().uid()} | {current.get_player().name()})", end=" -> ")
                 current = current.get_prev()
             print("None")
+
+    def __repr__(self):
+        return f"PLAYER_LIST_ID: {self.name}"
+
+    def is_empty(self):
+        return self.__head is None

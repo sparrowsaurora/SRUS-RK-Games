@@ -11,3 +11,13 @@ class Player:
 
     def __str__(self):
         return f"Player({self.name()}, {self.uid()})"
+
+    @classmethod
+    def hash(cls, key: str) -> int:
+        return sum(ord(char) for char in key)
+
+    def __hash__(self):
+        return Player.hash(self.__uid)
+
+    def __eq__(self, other) -> bool:
+        return self.uid() == other.uid()
