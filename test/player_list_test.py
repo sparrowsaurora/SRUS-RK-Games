@@ -6,7 +6,7 @@ from app.player import Player
 class TestPlayerList(unittest.TestCase):
     def setUp(self):
         """Set up a fresh PlayerList before each test"""
-        self.player_list = PlayerList()
+        self.player_list = PlayerList(1)
 
     def test_insert_first_player_at_head(self):
         # Test inserting the first player into an empty list

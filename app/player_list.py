@@ -1,5 +1,5 @@
 from app.player_node import PlayerNode
-import math
+from app.player import Player
 
 class PlayerList:
     def __init__(self, name: int):
@@ -65,7 +65,9 @@ class PlayerList:
             raise IndexError("Cannot delete item from empty list")
 
         current = self.__head
-        while current is not None and current.key != key:
+        target_uid = key.uid() if isinstance(key, Player) else key
+
+        while current is not None and current.key != target_uid:
             current = current.get_next()
 
         # if key was not found
@@ -98,6 +100,22 @@ class PlayerList:
     def get_tail(self):
         return self.__tail
 
+    def get_player(self, key: str | Player):
+        current = self.__head
+        uuid = key.uid() if isinstance(key, Player) else key
+        while current:
+            if current.get_player().uid() == uuid:
+                return current.get_player()
+            current = current.get_next()
+        raise KeyError(f"Player with UID '{uuid}' not found.")
+
+    def contains_player(self, key: str | Player):
+        try:
+            self.get_player(key)
+            return True
+        except KeyError:
+            return False
+
     def display(self, forward=True):
         if forward:
             # head to tail
@@ -123,3 +141,11 @@ class PlayerList:
 
     def is_empty(self):
         return self.__head is None
+
+    def __len__(self):
+        count = 0
+        current = self.__head
+        while current:
+            count += 1
+            current = current.get_next()
+        return count
