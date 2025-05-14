@@ -2,12 +2,12 @@
 
 This assessment evaluates your ability to perform the following tasks in accordance with ICTPRG547 Apply advanced programming skills in another language:
 
- - Performance elements:
+- Performance elements:
 
-  - 1.4 Code sorting algorithm using programming techniques
-  - 3.2 Detect and resolve errors of syntactical, logical and design origin
-  - 3.3 Design and document required tests
-  - 4.1 Develop and document solution according to debugging test results
+- 1.4 Code sorting algorithm using programming techniques
+- 3.2 Detect and resolve errors of syntactical, logical and design origin
+- 3.3 Design and document required tests
+- 4.1 Develop and document solution according to debugging test results
 
 You will demonstrate your performance by providing evidence that you can "code at least one sorting algorithm", and "test and debug the code to resolve errors of a syntactical, logical, or design origin".
 
@@ -71,7 +71,10 @@ def test_sort_players(self):
 What was the outcome of running the above unit test, copy paste the output **for just this particular test** below:
 
 ```text
-Your output here
+players = [Player("Alice", uid='01', score=10), Player("Bob", uid='02', score=5), Player("Charlie", uid='03', score=15)]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: Player.__init__() got an unexpected keyword argument 'uid'
+
 ```
 
 ### 4.3. Success criteria
@@ -274,4 +277,5 @@ I understand that until I meet my assessor to confirm that this work is a valid 
 - [ ] Submit a zip of your repository to the LMS (ensure you do not add the `.venv` or `__pycache__` folders)
 
 ---
+
 End of assessment task

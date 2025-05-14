@@ -11,6 +11,8 @@ class Player:
         return self.__player_name
 
     def set_score(self, score: int):
+        if score < 0:
+            raise ValueError("Score cannot be negative")
         self.__score = score
 
     @property

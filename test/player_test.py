@@ -36,4 +36,16 @@ class TestPlayer(unittest.TestCase):
         self.assertEqual(ascending_scores, [0, 1, 2, 2, 3, 4, 5, 6, 7, 8, 9])
         self.assertEqual(Player.sort_players([0, 0, 40, 2]), [40, 2, 0, 0])
 
+    def test_sort_players(self):
+        players = [Player("Alice", uid='01', score=10), Player("Bob", uid='02', score=5), Player("Charlie", uid='03', score=15)]
+        # note: ensure initialization code is valid for **your** implementation
+
+        # do **not** change the following code:
+        sorted_players = sorted(players)
+
+        # players must be sorted by score as shown here:
+        manually_sorted_players = [Player("Bob", uid='02', score=5), Player("Alice", uid='01', score=10), Player("Charlie", uid='03', score=15)]
+
+        self.assertListEqual(sorted_players, manually_sorted_players)
+
 unittest.main()
