@@ -71,9 +71,12 @@ def test_sort_players(self):
 What was the outcome of running the above unit test, copy paste the output **for just this particular test** below:
 
 ```text
-players = [Player("Alice", uid='01', score=10), Player("Bob", uid='02', score=5), Player("Charlie", uid='03', score=15)]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-TypeError: Player.__init__() got an unexpected keyword argument 'uid'
+sparrow@fedora:~/source/repos/SRUS-RK-Games$ PYTHONPATH=app python test/player_test.py
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
 
 ```
 
@@ -82,12 +85,13 @@ TypeError: Player.__init__() got an unexpected keyword argument 'uid'
 - [ ] Unit test added to `test_player.py`
 - [ ] Unit test output provided
 - [ ] Unit test output reflects the error in `sorted(players)` (if you are getting another error read the instructions CAREFULLY)
+^?? i got a passed test? sorry if thats an issue
 
 #### 4.3.1. Question
 
 The tests checks that calling sorted on a list of players will sort them by score, what is the **only** magic method that must be implemented in the player class for the `sorted` function to succeed?
 
-> Answer Here
+> the only method TECHNICALLY needed is a __gt_ method but having a ___lt_ method will also work. and hypothetically a __ge_ or __le_ method alone will work.
 
 #### 4.3.2. Task: Implement the magic method in the Player class
 
@@ -106,8 +110,15 @@ def test_players_can_be_compared_by_score(self):
 Run the test and confirm that your error resembles the previous error
 
 ```text
-INSERT ERROR OUTPUT HERE
+sparrow@fedora:~/source/repos/SRUS-RK-Games$ PYTHONPATH=app python test/player_test.py
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
 ```
+
+>again due to mixed order implementation? Not a error.
 
 Implement the appropriate magic method in the Player class and ensure you pass this test (and only this test!).
 
