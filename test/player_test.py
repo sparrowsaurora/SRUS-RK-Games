@@ -53,12 +53,25 @@ class TestPlayer(unittest.TestCase):
     #     self.assertListEqual(sorted_players, manually_sorted_players)
 
 
-    def test_players_can_be_compared_by_score(self):
-        # note: ensure initialization code is valid for **your** implementation
-        alice = Player(player_name="Alice", unique_id='01', score=10)
-        bob = Player(player_name="Bob", unique_id='02', score=5)
+    # def test_players_can_be_compared_by_score(self):
+    #     # note: ensure initialization code is valid for **your** implementation
+    #     alice = Player(player_name="Alice", unique_id='01', score=10)
+    #     bob = Player(player_name="Bob", unique_id='02', score=5)
 
-        # Add the appropriate expression to the following assert test
-        self.assertTrue(alice > bob)
+    #     # Add the appropriate expression to the following assert test
+    #     self.assertTrue(alice > bob)
+
+    def test_player_quicksort(self):
+        players = [Player(player_name="Alice", unique_id='01', score=10), 
+            Player(player_name="Bob", unique_id='02', score=5), 
+            Player(player_name="Charlie", unique_id='03', score=15)]
+        sorted_players = Player.quicksort(players)
+        print(str(sorted_players))
+        solution = [
+            Player(player_name="Charlie", unique_id='03', score=15), 
+            Player(player_name="Alice", unique_id='01', score=10), 
+            Player(player_name="Bob", unique_id='02', score=5)
+            ]
+        self.assertTrue(str(sorted_players) == str(solution))
 
 unittest.main()

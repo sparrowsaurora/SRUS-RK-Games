@@ -175,7 +175,7 @@ def sort_quickly(arr):
 
 What is the expected time and space complexity of the above algorithm? You can answer using big O or in plain English but in both cases you MUST justify your answer.
 
-> Answer here
+> the above algorithm's time complexity is O(n log n) on average however if in a worst case senario can be O(n^2). id expect a O(n log n) time complexity from this algorithm. to justify, this algorithm recursively splits a list into smaller lists. and sorts it on te way down to join it which allows it to rejoin many smaller lists reducing the time complexity
 
 ### 5.2. Task: Implement the custom sorting algorithm
 

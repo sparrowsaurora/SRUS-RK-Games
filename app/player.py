@@ -78,3 +78,22 @@ class Player:
             return iter_result + left + right
 
         return merge_sort(players, ascending)
+
+    @classmethod
+    def quicksort(cls, players: list):
+        """
+        sorts players in descending order using quicksort
+        for por3-inclass-5.2
+        """
+        if len(players) <= 1:
+            return players
+        pivot = players[0]
+        left = []
+        right = []
+        for x in players[1:]:
+            if x < pivot:
+                left.append(x)
+            else:
+                right.append(x)
+        return Player.quicksort(left) + [pivot] + Player.quicksort(right)
+    
