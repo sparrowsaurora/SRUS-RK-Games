@@ -85,13 +85,15 @@ OK
 - [ ] Unit test added to `test_player.py`
 - [ ] Unit test output provided
 - [ ] Unit test output reflects the error in `sorted(players)` (if you are getting another error read the instructions CAREFULLY)
-^?? i got a passed test? sorry if thats an issue
+      ^?? i got a passed test? sorry if thats an issue
+
+> NOTE:: I really cant figure out why my tests are passing. if i need to redo this i will but i think ive just done this out of order
 
 #### 4.3.1. Question
 
 The tests checks that calling sorted on a list of players will sort them by score, what is the **only** magic method that must be implemented in the player class for the `sorted` function to succeed?
 
-> the only method TECHNICALLY needed is a __gt_ method but having a ___lt_ method will also work. and hypothetically a __ge_ or __le_ method alone will work.
+> the only method TECHNICALLY needed is a **gt* method but having a ***lt* method will also work. and hypothetically a \_\_ge* or \__le_ method alone will work.
 
 #### 4.3.2. Task: Implement the magic method in the Player class
 
@@ -118,7 +120,7 @@ Ran 1 test in 0.000s
 OK
 ```
 
->again due to mixed order implementation? Not a error.
+> again due to mixed order implementation? Not a error.
 
 Implement the appropriate magic method in the Player class and ensure you pass this test (and only this test!).
 
@@ -190,7 +192,18 @@ Add a separate test case to `test_player.py` to test your custom sorting algorit
 Include your code below:
 
 ```python
-# YOUR CUSTOM Sorting here
+def test_player_quicksort(self):
+        players = [Player(player_name="Alice", uid='01', score=10),
+            Player(player_name="Bob", uid='02', score=5),
+            Player(player_name="Charlie", uid='03', score=15)]
+        sorted_players = Player.quicksort(players)
+
+        solution = [
+            Player(player_name="Bob", uid='02', score=5),
+            Player(player_name="Alice", uid='01', score=10),
+            Player(player_name="Charlie", uid='03', score=15)
+            ]
+        self.assertTrue([player.score for player in sorted_players] == [player.score for player in solution])
 ```
 
 #### 5.2.3. Success criteria
@@ -219,7 +232,12 @@ Using the code above as a starting point, create a test case to test your custom
 Include your test case below:
 
 ```python
-
+    def test_large_quicksort_volume(self):
+        import random
+        players = [Player(f"Player {i}", uid=f"{i:03}", score=random.randint(0, 1000)) for i in range(1000)]
+        quicksorted_players = Player.quicksort(players)
+        sorted_players = sorted(players)
+        self.assertTrue([player.score for player in quicksorted_players] == [player.score for player in sorted_players])
 ```
 
 #### 5.3.2. Success criteria
@@ -239,20 +257,58 @@ Create a test case that tries to sort 1000 players that are already sorted.
 If you get a failure, include the failure below:
 
 ```text
-YOUR FAILURE HERE
+======================================================================
+ERROR: test_sorting_sorted_values (__main__.TestPlayer.test_sorting_sorted_values)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "c:\Users\Sparrow\source\repos\SRUS-RK-Games\test\player_test.py", line 183, in test_sorting_sorted_values
+    twice_quicksorted_players = Player.quicksort(quicksorted_players)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Sparrow\source\repos\SRUS-RK-Games\test\player_test.py", line 100, in quicksort
+    return Player.quicksort(left) + [pivot] + Player.quicksort(right)
+                                              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Sparrow\source\repos\SRUS-RK-Games\test\player_test.py", line 100, in quicksort
+    return Player.quicksort(left) + [pivot] + Player.quicksort(right)
+                                              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Sparrow\source\repos\SRUS-RK-Games\test\player_test.py", line 100, in quicksort
+    return Player.quicksort(left) + [pivot] + Player.quicksort(right)
+                                              ^^^^^^^^^^^^^^^^^^^^^^^
+  [Previous line repeated 983 more times]
+  File "c:\Users\Sparrow\source\repos\SRUS-RK-Games\test\player_test.py", line 96, in quicksort
+    if x < pivot:
+       ^^^^^^^^^
+  File "c:\Users\Sparrow\source\repos\SRUS-RK-Games\test\player_test.py", line 47, in __lt__
+    return self.score < other.score
+           ^^^^^^^^^^
+RecursionError: maximum recursion depth exceeded
+
+----------------------------------------------------------------------
+Ran 1 test in 0.117s
+
+FAILED (errors=1)
 ```
 
 Provide a reason why this test failed (if you got recursion errors, you need to explain **why** they occurred).
 
 If your implementation did not fail, you must explain what changes you made to the original algorithm given by the senior developer to ensure that it did not fail.
 
-> Answer here
+> a Presorted algorithm is the worst case scenario for a quicksort algorithm. due to the list already being sorted. the program had to split and recursivelt call itself too many times.
+> python has a limit to how many times a functions can call recursively to protect against unwanted memory usage
 
 Propose a fix to your sorting algorithm that fixes this issue.
 
+> a couple of solutions exist.
+>
+> - we can instruct python to increase the upper limit of max recursions.
+> - we can rewrite this feature in another language
+> - however i would run a linear scan across the data to ensure it's not already sorted. this would keep the same time complexity. just add a slight buffer.
+
 ```python
-# YOUR FIX HERE
-# Highlight what the fix was
+    def is_sorted(players: list) -> bool:
+            for i in range(1, len(players)):
+                if players[i] > players[i - 1]:
+                    return False
+            return True
 ```
 
 #### 5.3.5. Success criteria
@@ -265,16 +321,9 @@ Propose a fix to your sorting algorithm that fixes this issue.
 Complete the following snippet before you submit:
 
 ```text
-I, <name and student number>, completed this work in class <room number>, on <date>, under the supervision of <assessor's name>.
-```
-
-Or (if not completed in class):
-
-```text
-I, <name and student number>, completed this work outside of the scheduled hours. I emailed <assessors name>, on <date>, along with my documented reason for non-attendance, and have scheduled a time to meet to discuss my work.
+I, Ryan Kelley 20136584, completed this work outside of the scheduled hours. I spoke to Rafael Avigad, on 21/5/25, along with my documented reason for non-attendance, and have scheduled a time to meet to discuss my work.
 
 I understand that until I meet my assessor to confirm that this work is a valid and true representation of my abilities to write and debug a sorting algorithm in Python, this submission cannot be considered complete.
-
 ```
 
 ## 7. Submit your work

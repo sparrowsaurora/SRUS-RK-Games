@@ -1,6 +1,6 @@
 class Player:
-    def __init__(self, unique_id: str, player_name: str, score: int =0):
-        self.__uid = unique_id
+    def __init__(self, player_name: str, uid: str, score: int =0):
+        self.__uid = uid
         self.__player_name = player_name
         self.__score = score
 
@@ -85,15 +85,24 @@ class Player:
         sorts players in descending order using quicksort
         for por3-inclass-5.2
         """
-        if len(players) <= 1:
+        def is_sorted(players: list) -> bool:
+            for i in range(1, len(players)):
+                if players[i] > players[i - 1]:
+                    return False
+            return True
+        
+        if len(players) <= 1 or is_sorted(players):
             return players
         pivot = players[0]
         left = []
+        middle = [pivot]
         right = []
         for x in players[1:]:
-            if x < pivot:
+            if x > pivot:
                 left.append(x)
-            else:
+            elif x < pivot:
                 right.append(x)
-        return Player.quicksort(left) + [pivot] + Player.quicksort(right)
-    
+            else:
+                middle.append(x)
+
+        return cls.quicksort(left) + middle + cls.quicksort(right)
