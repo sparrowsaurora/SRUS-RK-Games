@@ -26,3 +26,18 @@ class PlayerBST:
                 self._insert_recursive(node.rst, player)
         else:
             node.set_bnode_player(player)
+
+    def search(self, name: str):
+        return self._search_recursive(self.__root, name)
+
+    def _search_recursive(self, node, name: str):
+        if node is None:
+            return None
+
+        if name == node.bnode_player.name():
+            return node.bnode_player
+
+        if name < node.bnode_player.name():
+            return self._search_recursive(node.lst, name)
+
+        return self._search_recursive(node.rst, name)

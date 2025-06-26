@@ -47,3 +47,23 @@ class TestPlayerBST(unittest.TestCase):
         self.assertEqual(root.bnode_player.uid(), "2")
         self.assertEqual(root.bnode_player, player2)
 
+    def test_search_existing_player(self):
+        player1 = Player("John", "1")
+        player2 = Player("Jane", "2")
+        player3 = Player("Test", "3")
+
+        self.tree.insert(player1)
+        self.tree.insert(player2)
+        self.tree.insert(player3)
+
+        result = self.tree.search("Jane")
+        self.assertIsNotNone(result)
+        self.assertEqual(result.name(), "Jane")
+        self.assertEqual(result.uid(), "2")
+
+    def test_search_nonexistent_player(self):
+        player1 = Player("John Doe", "1")
+        self.tree.insert(player1)
+
+        result = self.tree.search("Jane Doe")
+        self.assertIsNone(result)
