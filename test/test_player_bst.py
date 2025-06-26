@@ -67,3 +67,28 @@ class TestPlayerBST(unittest.TestCase):
 
         result = self.tree.search("Jane Doe")
         self.assertIsNone(result)
+
+    def test_balance_creates_balanced_tree(self):
+        players = [
+            Player("Charlie", "1", score=3),
+            Player("Alice", "2", score=1),
+            Player("Eve", "3", score=4),
+            Player("Bob", "4", score=2),
+        ]
+        for player in players:
+            self.tree.insert(player)
+
+        self.tree.balance()
+
+        root = self.tree.root
+        self.assertEqual(root.bnode_player.name(), "Bob")
+        self.assertIsNotNone(root.lst)
+        self.assertEqual(root.lst.bnode_player.name(), "Alice")
+        self.assertIsNotNone(root.rst)
+        self.assertEqual(root.rst.bnode_player.name(), "Charlie")
+        self.assertIsNotNone(root.rst.rst)
+        self.assertEqual(root.rst.rst.bnode_player.name(), "Eve")
+        self.assertIsNone(root.rst.lst)
+
+
+
