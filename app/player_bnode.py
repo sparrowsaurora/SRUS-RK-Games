@@ -1,6 +1,5 @@
-from player import Player
 class PlayerBNode:
-    def __init__(self, player: Player):
+    def __init__(self, player):
         self.__player = player
         self.__lst = None
         self.__rst = None
@@ -22,4 +21,6 @@ class PlayerBNode:
 
     def set_lst(self, new_lst):
         self.__lst = new_lst
-        
+
+    def set_bnode_player(self, new_player):
+        self.__player = new_player

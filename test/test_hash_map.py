@@ -77,6 +77,3 @@ class TestPlayerHashMap(unittest.TestCase):
         self.hm[self.player2] = self.player2
         self.assertEqual(len(self.hm), 2)
         self.assertIn("PlayerHashMap", repr(self.hm))
-
-if __name__ == "__main__":
-    unittest.main()

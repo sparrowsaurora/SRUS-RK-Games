@@ -136,6 +136,3 @@ class TestPlayerList(unittest.TestCase):
 
         self.player_list.display()
         self.player_list.display(False)
-
-if __name__ == "__main__":
-    unittest.main()

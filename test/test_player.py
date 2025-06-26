@@ -1,5 +1,5 @@
 import unittest
-from player import Player 
+from app.player import Player 
 
 class TestPlayer(unittest.TestCase):
     def test_uid(self):
@@ -83,5 +83,3 @@ class TestPlayer(unittest.TestCase):
         quicksorted_players = Player.quicksort(players)
         twice_quicksorted_players = Player.quicksort(quicksorted_players)
         self.assertTrue([player.score for player in quicksorted_players] == [player.score for player in twice_quicksorted_players])
-
-unittest.main()
